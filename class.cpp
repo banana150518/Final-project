@@ -3,12 +3,12 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
+#include <sstream>
 using namespace std;
-//
 //---------------------------------------------------------------------Player
 struct Point {
-    int x;
-    int y;
+    int x = 0;
+    int y = 0;
 };
 
 class Player {
@@ -18,6 +18,10 @@ class Player {
                1. ใช้ rand() เพื่อสุ่มเลขระหว่าง 1 ถึง sides
                2. คืนค่าผลลัพธ์การทอยเพื่อนำไปใช้ในฟังก์ชัน move
             */
+            srand(time(0)); 
+            int random_num = rand();
+            int Result = random_num % (sides + 1);
+            return Result;
         }
         bool move(string direction){
             /* Requirement:
@@ -26,6 +30,43 @@ class Player {
                3. ตรวจสอบขอบกระดาน (0-9) ไม่ให้เดินทะลุออกไป
                4. คืนค่า true หากเดินสำเร็จ
             */
+            if(canMove) return false;
+            
+            //----------------------Split sting
+            string split_direction;
+            vector<string> direction_list;
+        
+            stringstream ss(direction);
+            
+            while(ss >> split_direction){
+                direction_list.push(split_direction);
+            }
+            //----------------------Update position
+            for(auto &i : direction_list){
+                if((i != "W") || i != "A") || i != "S") || i != "D")) {
+                    cout << "Invalid Move";
+                    return false
+                }
+            }
+            
+            Point point;
+            for(auto &i : direction_list){
+                if((i == "A") || (i == "D")){
+                    //update X
+                    if((point.x > 0) || (point.x < 10)){
+                        if(I == "A") point.x -= 1;
+                        if(I == "D") point.x += 1;
+                    }
+                }
+                if((i == "W") || (i == "S")){
+                    //update Y
+                    if((point.y > 0) || (point.y < 10)){
+                        if(I == "W") point.y -= 1;
+                        if(I == "S") point.y += 1;
+                    }
+                }
+            }
+            return true;
         }
         bool takeDamage(int amount){
             /* Requirement:
@@ -33,12 +74,14 @@ class Player {
                2. ถ้า hp <= 0 ให้ตั้งค่า isAlive = false และ hp = 0
                3. คืนค่า true ถ้าผู้เล่นยังไม่ตาย
             */
+            return false;
         }
         bool heal(int amount){
             /* Requirement:
                1. เพิ่มค่า hp ตาม amount แต่ไม่เกินค่า MaxHP (เช่น 100)
                2. คืนค่า true หากการ Heal สำเร็จ
             */
+            return false;
         }
     private :
         string name;
@@ -189,5 +232,7 @@ class GameEngine {
 
 int main() {
     // เริ่มต้นระบบสุ่ม และสร้างตัวแปร GameEngine เพื่อ Run เกม
+    Player player1;
+    bool x = player1.move("W A S D W W W");
     return 0;
 }
