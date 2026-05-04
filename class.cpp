@@ -43,7 +43,7 @@ class Player {
             }
             //----------------------Update position
             for(auto &i : direction_list){
-                if((i != "W") || i != "A") || i != "S") || i != "D")) {
+                if(i != "W") || (i != "A") || (i != "S") || (i != "D") {
                     cout << "Invalid Move";
                     return false
                 }
