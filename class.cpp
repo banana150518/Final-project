@@ -39,13 +39,13 @@ class Player {
             stringstream ss(direction);
             
             while(ss >> split_direction){
-                direction_list.push(split_direction);
+                direction_list.push_back(split_direction);
             }
             //----------------------Update position
             for(auto &i : direction_list){
-                if(i != "W") || (i != "A") || (i != "S") || (i != "D") {
+                if((i != "W") || (i != "A") || (i != "S") || (i != "D")) {
                     cout << "Invalid Move";
-                    return false
+                    return false;
                 }
             }
             
@@ -54,15 +54,15 @@ class Player {
                 if((i == "A") || (i == "D")){
                     //update X
                     if((point.x > 0) || (point.x < 10)){
-                        if(I == "A") point.x -= 1;
-                        if(I == "D") point.x += 1;
+                        if(i == "A") point.x -= 1;
+                        if(i == "D") point.x += 1;
                     }
                 }
                 if((i == "W") || (i == "S")){
                     //update Y
                     if((point.y > 0) || (point.y < 10)){
-                        if(I == "W") point.y -= 1;
-                        if(I == "S") point.y += 1;
+                        if(i == "W") point.y -= 1;
+                        if(i == "S") point.y += 1;
                     }
                 }
             }
